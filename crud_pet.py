@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from db import get_connection
 from models import Pet
 from typing import List
@@ -26,3 +26,30 @@ async def listar_pets():
             id_tutor=row[7]
         ) for row in rows
     ]
+
+@router.post("/pet")
+async def criar_pet(pet:Pet):
+    conn = get_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute(
+          "INSERT  INTO pet(id_pet, nome_pet, especie, raca, sexo, data_nasc, peso_atual, id_tutor) " \
+          "VALUES (%s, %s, %s, %s, %s, %s, %s, %s) """, 
+          ( pet.id_pet,
+           pet.nome_pet,
+           pet.especie,
+           pet.raca,
+           pet.sexo,
+           pet.data_nasc,
+           pet.peso_atual,
+           pet.id_tutor) 
+        )
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(400, f"Erro ao Cadastrar pet: {e}")
+    finally:
+        cur.close()
+        conn.close()
+    return {"msg": "Pet Cadastrado com sucesso"}
+    
