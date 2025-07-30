@@ -3,6 +3,13 @@
 Aplicação desenvolvida para a disciplina **Fundamentos de Banco de Dados** da UFC - Campus Quixadá.
 
 ---
+---
+
+## 🤝 Colaboração
+
+- **Cauan Ricardo Ribeiro**: Implementação da aplicação em FastAPI (CRUDs, integração com PostgreSQL, testes).
+- **Enzo Hariel Ferreira Gaspar**: Criação das visões SQL, controle de acesso e organização do `etapa4.sql`. 
+
 
 ## 📌 Objetivo
 
