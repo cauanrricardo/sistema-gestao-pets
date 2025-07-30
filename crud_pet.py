@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from db import get_connection
 from models import Pet
 from typing import List
+from models import PetUpdate
 
 router = APIRouter()
 
@@ -52,4 +53,59 @@ async def criar_pet(pet:Pet):
         cur.close()
         conn.close()
     return {"msg": "Pet Cadastrado com sucesso"}
-    
+
+@router.patch("/pet/{id_pet}")
+async def atualizar_pet(id_pet: int, pet: PetUpdate):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT id_pet FROM pet WHERE id_pet = %s", (id_pet,))
+    if not cur.fetchone():
+        cur.close()
+        conn.close()
+        raise HTTPException(404, "Pet não encontrado")
+
+    fields = []
+    values = []
+    for campo, valor in pet.dict(exclude_unset=True).items():
+        fields.append(f"{campo} = %s")
+        values.append(valor)
+
+    if not fields:
+        raise HTTPException(400, "Nenhum dado fornecido para atualização")
+
+    values.append(id_pet)
+
+    try:
+        cur.execute(
+            f"UPDATE pet SET {', '.join(fields)} WHERE id_pet = %s",
+            values
+        )
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(400, f"Erro ao atualizar pet: {e}")
+    finally:
+        cur.close()
+        conn.close()
+
+    return {"msg": "Pet atualizado com sucesso"}
+
+@router.delete("/pet/{id_pet}")
+async def deletar_pet(id_pet: int):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT id_pet FROM pet WHERE id_pet = %s", (id_pet,))
+    if not cur.fetchone():
+        cur.close()
+        conn.close()
+        raise HTTPException(status_code=404, detail="Pet não encontrado")
+    try:
+        cur.execute("DELETE FROM pet WHERE id_pet = %s", (id_pet,))
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        raise HTTPException(status_code=400, detail=f"Erro ao deletar pet: {e}")
+    finally:
+        cur.close()
+        conn.close()
+    return {"msg": "Pet removido com sucesso"}
