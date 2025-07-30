@@ -3,7 +3,6 @@
 Aplicação desenvolvida para a disciplina **Fundamentos de Banco de Dados** da UFC - Campus Quixadá.
 
 ---
----
 
 ## 🤝 Colaboração
 
