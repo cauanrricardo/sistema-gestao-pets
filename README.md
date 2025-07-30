@@ -41,6 +41,3 @@ Criar um sistema que facilite a gestão de clínicas veterinárias, com foco no 
 - `etapa4.sql`: comandos SQL das visões e permissões
 - `db.py`: integração com o PostgreSQL (usar variáveis de ambiente para dados sensíveis)
 
----
-
-> ⚠️ **Importante:** os dados de acesso ao banco (como senha) não devem ser incluídos neste repositório. Utilize um arquivo `.env` local e configure o `.gitignore` para protegê-lo.
