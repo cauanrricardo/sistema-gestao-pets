@@ -1,22 +1,22 @@
-# 🐶 Sistema de Gestão de Pets
+# Sistema de Gestão de Pets
 
 Aplicação desenvolvida para a disciplina **Fundamentos de Banco de Dados** da UFC - Campus Quixadá.
 
 ---
 
-## 🤝 Colaboração
+## Colaboração
 
 - **Cauan Ricardo Ribeiro**: Implementação da aplicação em FastAPI (CRUDs, integração com PostgreSQL, testes).
 - **Enzo Hariel Ferreira Gaspar**: Criação das visões SQL, controle de acesso e organização do `etapa4.sql`. 
 
 
-## 📌 Objetivo
+##  Objetivo
 
 Criar um sistema que facilite a gestão de clínicas veterinárias, com foco no acompanhamento clínico dos pets e na organização das informações dos tutores, profissionais e consultas.
 
 ---
 
-## ⚙️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - **Python + FastAPI**
 - **PostgreSQL**
@@ -25,7 +25,7 @@ Criar um sistema que facilite a gestão de clínicas veterinárias, com foco no 
 
 ---
 
-## 📁 Funcionalidades
+##  Funcionalidades
 
 - CRUD de **Tutor**
 - CRUD de **Pet**
@@ -37,7 +37,7 @@ Criar um sistema que facilite a gestão de clínicas veterinárias, com foco no 
 
 ---
 
-## 🧩 Organização do Projeto
+##  Organização do Projeto
 
 - `main.py`: inicializa a aplicação FastAPI
 - `models/`: modelos de dados (Pydantic)
